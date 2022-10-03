@@ -1,0 +1,38 @@
+body {
+  background-color: #d95550;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  height: 460px;
+  width: 600px;
+  background-color: #dd6662;
+  color: #fff;
+  border: #dd6662;
+  border-radius: 6px;
+}
+
+.time-sets {
+  display: grid;
+  grid-template-columns: 40px 100px 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+#timer-label {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.timeLeft {
+  text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 96px;
+  font-weight: bold;
+  /* height: 110px; */
+}

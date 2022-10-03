@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>JavaScript Calculator</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const ACTIONS = {
+        INPUT_DIGIT: 'input digit',
+        INPUT_OPERATOR: 'input operator',
+        CLEAR_ALL: 'clear all',
+        CALCULATE: 'calculate',
+      }
+
+      function reducer(state, { type, payload }) {
+        switch (type) {
+          case ACTIONS.INPUT_DIGIT:
+            if (state.calculated) {
+              return { ...state, currentVal: payload, formula: payload, calculated: false }
+            }
+            if (payload === '0' && state.currentVal === '0') {
+              return { ...state, formula: payload }
+            }
+            if (payload === '.' && state.currentVal === '0') {
+              return { ...state, currentVal: '0.', formula: state.formula + payload }
+            }
+            if (payload != '0' && state.currentVal === '0') {
+              return { ...state, currentVal: payload, formula: payload }
+            }
+            if (payload === '.' && state.currentVal.includes('.')) {
+              return state
+            }
+            if (/[\-x\/+]/.test(state.currentVal)) {
+              return { ...state, currentVal: payload, formula: state.formula + payload }
+            }
+
+            return {
+              ...state,
+              currentVal: state.currentVal + payload,
+              formula: state.formula == null ? payload : state.formula + payload,
+            }
+
+          case ACTIONS.INPUT_OPERATOR:
+            if (state.calculated) {
+              const [prevFormula, result] = state.formula.split('=')
+              return { ...state, currentVal: payload, formula: result + payload, calculated: false }
+            }
+
+            if (state.formula == null)
+              return {
+                ...state,
+                currentVal: payload,
+                formula: '0' + payload,
+              }
+            if (/[\-x\/+]-+$/.test(state.formula)) {
+              //end with any operator + '-'
+              return {
+                ...state,
+                currentVal: payload,
+                formula: state.formula.replace(/[\-x\/+]-+$/, payload),
+              }
+            }
+            if (/[\-x\/+]$/.test(state.formula)) {
+              // end with any operator
+              return {
+                ...state,
+                currentVal: payload === '-' ? state.currentVal + payload : payload,
+                formula: payload === '-' ? state.formula + payload : state.formula.slice(0, -1) + payload,
+              }
+            }
+
+            return { ...state, currentVal: payload, formula: state.formula + payload }
+
+          case ACTIONS.CLEAR_ALL:
+            return { currentVal: '0' }
+
+          case ACTIONS.CALCULATE:
+            if (state.calculated) {
+              return state
+            }
+            if (state.formula == null || isNaN(state.formula.slice(-1))) {
+              return state
+            }
+
+            return {
+              ...state,
+              currentVal: calculate(state.formula),
+              formula: `${state.formula}=${calculate(state.formula)}`,
+              calculated: true,
+            }
+        }
+      }
+
+      function calculate(formula) {
+        formula = formula.replace(/x/g, '*')
+        const answer = Math.round(eval(formula) * 100000000000000) / 100000000000000
+
+        return answer.toString()
+      }
+
+      function formatNumber(n) {
+        if (n == null) return
+        const [integer, decimal] = n.split('.')
+        if (decimal == null) {
+          return new Intl.NumberFormat().format(integer)
+        }
+        if (decimal != null) {
+          return `${new Intl.NumberFormat().format(integer)}.${decimal}`
+        }
+      }
+
+      function Calculator() {
+        const [{ currentVal, previousVal, formula, lastClick }, dispatch] = React.useReducer(reducer, {
+          currentVal: '0',
+        })
+        console.log(currentVal, formula)
+
+        return (
+          <div>
+            <div className='calculator'>
+              <div className='screen'>
+                <div className='formula-display'>{formula}</div>
+                <div className='result-display' id='display'>
+                  {isNaN(currentVal) ? currentVal : formatNumber(currentVal)}
+                </div>
+              </div>
+              <div className='buttons-grid'>
+                <button onClick={() => dispatch({ type: ACTIONS.CLEAR_ALL })} id='clear'>
+                  AC
+                </button>
+                <button
+                  onClick={() => dispatch({ type: ACTIONS.INPUT_OPERATOR, payload: '/' })}
+                  className='operator'
+                  id='divide'
+                >
+                  /
+                </button>
+                <button
+                  onClick={() => dispatch({ type: ACTIONS.INPUT_OPERATOR, payload: 'x' })}
+                  className='operator'
+                  id='multiply'
+                >
+                  x
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '7' })} id='seven'>
+                  7
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '8' })} id='eight'>
+                  8
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '9' })} id='nine'>
+                  9
+                </button>
+                <button
+                  onClick={() => dispatch({ type: ACTIONS.INPUT_OPERATOR, payload: '-' })}
+                  className='operator'
+                  id='subtract'
+                >
+                  -
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '4' })} id='four'>
+                  4
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '5' })} id='five'>
+                  5
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '6' })} id='six'>
+                  6
+                </button>
+                <button
+                  onClick={() => dispatch({ type: ACTIONS.INPUT_OPERATOR, payload: '+' })}
+                  className='operator'
+                  id='add'
+                >
+                  +
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '1' })} id='one'>
+                  1
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '2' })} id='two'>
+                  2
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '3' })} id='three'>
+                  3
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.CALCULATE })} className='equals' id='equals'>
+                  =
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '0' })} id='zero'>
+                  0
+                </button>
+                <button onClick={() => dispatch({ type: ACTIONS.INPUT_DIGIT, payload: '.' })} id='decimal'>
+                  .
+                </button>
+              </div>
+            </div>
+            <div className='author'>created by Tiefu</div>
+          </div>
+        )
+      }
+
+      const container = document.getElementById('app')
+      const root = ReactDOM.createRoot(container)
+      root.render(<Calculator />)
+    </script>
+  </body>
+</html>

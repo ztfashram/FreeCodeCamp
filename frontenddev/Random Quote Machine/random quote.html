@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <script src="https://kit.fontawesome.com/d508d02c34.js" crossorigin="anonymous"></script>
+    <title>Random Quote Machine</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        state = {
+          quotes: [
+            {
+              quote: "Life isn’t about getting and having, it’s about giving and being.",
+              author: "Kevin Kruse",
+            },
+          ],
+          index: 0,
+        };
+
+        componentDidMount() {
+          fetch(
+            "https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              this.setState({ quotes: data.quotes }, this.getRandomIndex);
+              // don't understand why getRandomIndex has to be a callback inside setState to get executed?
+            })
+            .catch((error) => {
+              console.log("failed to connect server");
+            });
+        }
+
+        getRandomIndex = () => {
+          const { quotes } = this.state;
+          if (quotes.length > 0) {
+            const index = Math.floor(Math.random() * quotes.length);
+            this.setState({
+              index: index,
+            });
+          }
+        };
+
+        // handleNewQuote = () => {
+        //   this.getRandomIndex();
+        // };
+
+        render() {
+          const { quotes, index } = this.state;
+          const quote = quotes[index];
+          const tweetUrl = "http://www.twitter.com/intent/tweet?text=" + quote.quote + "  -" + quote.author;
+
+          // console.log("@start render: ", quote);
+          return (
+            <div className="container">
+              <div id="quote-box">
+                <div className="quote-text">
+                  <i className="fa-solid fa-quote-left"></i>
+                  <span id="text">{quote && quote.quote}</span>
+                  <i className="fa-solid fa-quote-right"></i>
+                </div>
+                <div className="quote-author">
+                  - <span id="author">by {quote && quote.author}</span>
+                </div>
+                <div className="buttons">
+                  <a className="button" href={tweetUrl} id="tweet-quote" target="_blank">
+                    <i className="fa-brands fa-twitter-square"></i>
+                  </a>
+                  <button id="new-quote" type="button" className="btn btn-primary" onClick={this.getRandomIndex}>
+                    new quote
+                  </button>
+                </div>
+              </div>
+
+              <footer>created by Tiefu</footer>
+            </div>
+          );
+        }
+      }
+
+      const container = document.getElementById("app");
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+    </script>
+  </body>
+</html>

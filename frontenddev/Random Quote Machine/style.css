@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #88aa8d;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#quote-box {
+  border-radius: 5px;
+  width: 600px;
+
+  background-color: #fff;
+  padding: 20px;
+  margin: auto;
+}
+
+.quote-text {
+  font-size: 32px;
+  /* margin-bottom: 10px; */
+  padding: 15px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.quote-text i:first-child {
+  margin: 0 8px 0 0;
+}
+
+.quote-text i:last-child {
+  display: flex;
+  align-items: flex-end;
+  margin: 0 0 0 8px;
+}
+
+.quote-author {
+  text-align: right;
+  padding: 0 20px;
+}
+
+.buttons {
+  display: flex;
+  /* justify-content: flex-start; */
+  align-items: center;
+  padding: 0 20px;
+  margin-top: 10;
+}
+
+.button {
+  border-radius: 3px;
+}
+
+.button i {
+  font-size: 2.5em;
+  line-height: 100%;
+}
+
+#new-quote {
+  margin-left: auto;
+}
+
+footer {
+  text-align: center;
+  display: block;
+  width: 600px;
+  font-size: 14px;
+  margin-top: 5px;
+}

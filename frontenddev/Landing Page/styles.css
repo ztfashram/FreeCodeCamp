@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+@media (max-width: 800px) {
+
+}
+
+*{
+	box-sizing: border-box;
+}
+
+body {
+	margin-top: 100px;
+	font-family: "poppins";
+}
+	
+header {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	background-color:#feeaea;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.nav-link {
+	color: black;
+	text-decoration: none;
+	font-size: 1.4rem;
+	margin: 0 25px;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	max-width: 650px;
+	margin: 0 auto;
+	font-size: 13px;
+}
+
+section {
+	margin-bottom: 20px;
+}
+
+.section-title {
+	font-size: 30px;
+	text-align: center;
+}
+
+
+
+.content {
+	background-color: #feeaea;
+	margin: 0 1%;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	text-align: start;
+	border-radius: 10px;
+}
+
+.content > div > h3 {
+	font-size: 15px;
+	margin-left: 10px;
+}
+
+.content > div > p {
+	font-size: 13px;
+	margin-left: 10px;
+}
+
+#join {
+	background-color: #feeaea;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.flex {
+	display: flex;
+}
+
+.join-dscp {
+	font-size: 20px;
+	margin-bottom: 5px;
+	}
+
+#email {
+	padding: 5px 10px;
+	flex: 1;
+	margin-right: 10px;
+}
+
+.button {
+	background-color: #feeaea;
+	padding: 12px 15px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #e80b0b;
+	color: black;
+	text-decoration: none;
+	display: inline-block;
+	position: relative;
+	margin: 5px;
+}
+
+.button:active {
+	box-shadow: 0 0 0 #e80b0b;
+	transform: translate(2px 2px);
+}
+
+footer {
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+}

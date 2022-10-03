@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <title>Registration Form</title>
+</head>
+<body>
+  
+  <header>
+    <h1 id="title">Aimyon Survey Form</h1>
+    <p id="description">A small survey about Aimyon</p>
+  </header>
+  
+  <form id="survey-form">
+    <div class="form-group">
+      <label id="name-label" for="name">Name</label>
+      <input type="text" name="name" id="name" placeholder="Enter your name" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+      <label id="email-label" for="email">Email</label>
+      <input type="email"  name="email"  id="email"  placeholder="Enter your Email" class="form-control" required>
+        </div>
+    <div class="form-group">
+      <label id="number-label" for="number">Age</label>
+      <input type="number" name="number" id="number" min="8" max="99" placeholder="22" class="form-control" required>
+    </div>
+        
+    <div class="form-group">
+      <label id="drop-down-label" for="dropdown">Choose your favorite single of Aimyon:</label>
+      <select name="dropdown" id="dropdown" class="form-control" required>
+        <option value="">Please choose your favorite song of Aimoyn</option>
+        <option value="shine">貴方解剖純愛歌 〜死ね〜</option>
+        <option value="marigold">マリーゴールド</option>
+        <option value="rock">君はロックを聴かない</option>
+        <option value="sushi">ひかりもの</option>
+        <option value="heart">裸の心</option>
+        <option value="love">愛を知るまでは</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <p>If Aimyon Tour comes to your city, would you go?</p>
+      <label><input name="recommend" type="radio" value="definetly" checked>Definetly</label>
+      <label><input name="recommend" type="radio" value="maybe">Maybe</label>
+      <label><input name="recommend" type="radio" value="not-sure">Not Sure</label>
+      </label>
+    </div>
+        
+    <div class="form-group">
+      <p>What Aimyon merch would want to buy?</p>
+      <label><input name="merch" type="checkbox" value="T-shirt">T-shirt</label>
+      <label><input name="merch" type="checkbox" value="towel">towel</label>
+      <label><input name="merch" type="checkbox" value="sock">sock</label>
+      <label><input name="merch" type="checkbox" value="bag">bag</label>
+      <label><input name="merch" type="checkbox" value="blanket">blanket</label>
+    </div>
+
+    <div class="form-group">
+      <p>Any words you want say to Aimyon?</p>
+      <textarea name="comment" rows="5" cols="40" class="form-control">put your words here</textarea>
+    </div>
+    
+    <div class="submit-group">
+      <button type="submit" id="submit" class="submit-button"><b>Submit</b></button>
+    </div>
+
+  </form>
+</body>
+</html>

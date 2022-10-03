@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <title>Landing Page</title>
+  </head>
+  <body>
+    <header id="header" class="flex-container">
+      <img
+        id="header-img"
+        src="https://sp.aimyong.net/static/aimyong/fanclub/cmn/logo_fc.png"
+        alt="logo"
+        height="60px"
+      />
+      <nav id="nav-bar">
+        <a class="nav-link" href="#news">News</a>
+        <a class="nav-link" href="#member-contents">Member Contents</a>
+        <a class="nav-link" href="#join">Join</a>
+      </nav>
+    </header>
+
+    <section id="news">
+      <h2 class="section-title">New Release</h2>
+      <div class="container">
+        <iframe
+          id="video"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/6lgT4zBr8eY"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
+
+    <section id="member-contents">
+      <h2 class="section-title">Member Contents</h2>
+      <div class="container">
+        <div class="content">
+          <img
+            src="https://www.aimyong.net/static/aimyong/fanclub/top/ico_diary-min.png"
+            height="100px"
+          />
+          <div>
+            <h3>Diary</h3>
+            <p>あいみょんが日々のことを綴るブログです。</p>
+          </div>
+        </div>
+        <div class="content">
+          <img
+            src="https://www.aimyong.net/static/aimyong/fanclub/top/ico_message-min.png"
+            height="100px"
+          />
+          <div>
+            <h3>Message</h3>
+            <p>あいみょんにメッセージが送れます！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="join">
+      <div class="container">
+        <div class="block">
+          <p>月額440円(税込)</p>
+          <p>
+            ※クレジットカード決済(VISA/Master/JCB/AMEX/Diners)/ドコモ払い/auかんたん決済/ソフトバンクまとめて支払いに対応
+          </p>
+          <form id="form" action="#">
+            <p class="join-dscp"><b>Stay up-to-date with Aimyon</b></p>
+            <div class="flex">
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Enter Your Email"
+              />
+              <button id="submit" type="submit" class="button">
+                Subscribe!
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>Made by F</footer>
+  </body>
+</html>

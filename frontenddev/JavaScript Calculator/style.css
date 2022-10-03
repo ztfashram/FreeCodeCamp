@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@500&family=Fjalla+One&family=Indie+Flower&family=Poppins:wght@300&family=Roboto:wght@300&family=Ubuntu:wght@300&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Asap', sans-serif;
+}
+
+body {
+  background-color: #9a8c98;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 374px;
+  margin: auto;
+  padding: 3px;
+  background-color: #212529;
+  border: 1px solid black;
+  box-shadow: 0 0 10px 0 rgb(0, 0, 0, 0.5);
+}
+
+.screen {
+  color: #fff;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+}
+
+.formula-display {
+  font-size: 1.2rem;
+  padding: 0 5px 0 0;
+  width: 100%;
+  min-height: 21.6px;
+  text-align: end;
+  overflow-wrap: break-word;
+}
+
+.result-display {
+  font-size: 1.8rem;
+  padding: 0 5px 0 0;
+  height: auto;
+  width: 100%;
+  text-align: end;
+  overflow-wrap: break-word;
+}
+
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 90px);
+  grid-template-rows: repeat(5, 70px);
+  gap: 2px;
+}
+
+button {
+  background-color: #77c1b7;
+  font-size: 2rem;
+  border: none;
+  outline: solid 1px black;
+}
+button:hover {
+  background-color: #144e47;
+  outline: solid 0.05em #f3f3f3;
+  color: white;
+  z-index: 10;
+}
+
+#clear,
+#zero {
+  grid-column: span 2;
+}
+
+#clear {
+  background-color: #e97c61;
+}
+#clear:hover {
+  background-color: #902c14;
+}
+
+.operator {
+  background-color: #287271;
+}
+
+#equals {
+  grid-row: span 2;
+  background-color: #98c1d9;
+}
+#equals:hover {
+  background-color: #316786;
+}
+
+.author {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 5px;
+}

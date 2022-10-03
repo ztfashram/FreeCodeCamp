@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Markdown Previewer</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        state = {
+          markdown: placeHolder,
+        };
+
+        handleChange = (e) => {
+          this.setState({
+            markdown: e.target.value,
+          });
+        };
+
+        render() {
+          const { markdown } = this.state;
+
+          return (
+            <main>
+              <h1 className="heading">Markdown Previewer</h1>
+              <div className="containers">
+                <div className="container">
+                  <div className="subhead">Editor</div>
+                  <textarea name="editor" id="editor" onChange={this.handleChange} defaultValue={markdown}></textarea>
+                </div>
+                <div className="container">
+                  <div className="subhead">Previewer</div>
+                  <div id="preview" dangerouslySetInnerHTML={{ __html: marked.parse(markdown, { breaks: true }) }} />
+                </div>
+              </div>
+            </main>
+          );
+        }
+      }
+
+      const placeHolder = `
+# this is a header
+## this is a sub header
+check out **Aimyon** on [spotify](https://open.spotify.com/playlist/37i9dQZF1DWZ7hCgzgU48z)
+
+there is a \`<div></div>\` between 2 backticks.
+
+\`\`\`
+// this is some code:
+double = (a)=> {
+  return a * 2;
+};
+console.log(double(32));
+\`\`\`
+
+> Block Quotes!
+
+- item 1
+- item 2
+1. item 3
+2. item 4
+
+![React Logo](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)
+`;
+
+      const container = document.getElementById("app");
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+    </script>
+  </body>
+</html>
