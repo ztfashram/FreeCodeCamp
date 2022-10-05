@@ -1,5 +1,6 @@
 function LocalWeather() {
-    const [location, setLocation] = React.useState({ lat: 0, lon: 0 })
+    // const [latitude, setLatitude] = React.useState(0)
+    // const [longitude, setLongitude] = React.useState(0)
     const [city, setCity] = React.useState('')
     const [temp, setTemp] = React.useState(0)
     const [weather, setWeather] = React.useState('')
@@ -7,38 +8,35 @@ function LocalWeather() {
     const [windSpeed, setWindSpeed] = React.useState(0)
     const [celsius, setCelsius] = React.useState(true)
 
-    const fCCWeatherApi = 'https://weather-proxy.freecodecamp.rocks/api/current?'
+    const OpenWeatherApi = 'https://api.openweathermap.org/data/2.5/weather?'
+    const API_ID = 'YOUR API ID'
 
-    const onSuccess = (position) => {
-        setLocation({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-        })
-    }
+    // const onSuccess = (position) => {
+    //     setLatitude(position.coords.latitude)
+    //     setLongitude(position.coords.longitude)
+    //     console.log(position, newPosition)
+    // }
     const onError = (error) => {
         console.log(error.message)
     }
 
-    // const fetchWeatherData = async () => {
-    //     try {
-    //         if ('geolocation' in navigator) {
-    //             navigator.geolocation.getCurrentPosition(onSuccess, onError)
-    //         } else {
-    //             console.log('geolocation is not available')
-    //         }
-    //         console.log(location)
-    //         const response = await fetch(`${fCCWeatherApi}lat=${location.lat}&lon=${location.lon}`)
-    //         const data = await response.json()
-    //         setCity(data.name)
-    //         setTemp(data.main.temp)
-    //         setWeather(data.weather[0].main)
-    //         setHumidity(data.main.humidity)
-    //         setWindSpeed(data.wind.speed)
-    //         console.log(data)
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
+    const fetchWeatherData = async (position) => {
+        try {
+            const response = await fetch(
+                `${OpenWeatherApi}lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${API_ID}&units=metric`
+            )
+            const data = await response.json()
+            console.log(typeof 273.15)
+            setCity(data.name)
+            setTemp(data.main.temp)
+            setWeather(data.weather[0].main)
+            setHumidity(data.main.humidity)
+            setWindSpeed(data.wind.speed)
+            console.log(data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     function getWeatherIcon() {
         switch (weather) {
@@ -63,21 +61,9 @@ function LocalWeather() {
 
     React.useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
-            setLocation({ lat: position.coords.latitude, lon: position.coords.longitude })
-            console.log(position)
-            console.log(location)
-        })
-        fetch(`${fCCWeatherApi}lat=${location.lat}&lon=${location.lon}`)
-            .then((response) => response.json())
-            .then((data) => {
-                setCity(data.name)
-                setTemp(data.main.temp)
-                setWeather(data.weather[0].main)
-                setHumidity(data.main.humidity)
-                setWindSpeed(data.wind.speed)
-                console.log(data)
-            })
-    }, [weather])
+            fetchWeatherData(position)
+        }, onError)
+    }, [])
 
     return (
         <div className='container'>
