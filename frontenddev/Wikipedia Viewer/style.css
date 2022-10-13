@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Linux Libertine, Hoefler Text, Georgia, Times New Roman, Times, serif;
+}
+
+#app {
+    background-color: #e8ecec;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    /* transition: 1s; */
+}
+
+input {
+    display: block;
+    appearance: none;
+    outline: none;
+    border: 1px solid #a2a9b1;
+    border-right: 0;
+    border-radius: 3px 0 0 3px;
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+input:hover {
+    border-color: #4d545c;
+}
+
+input:focus-within {
+    border-color: #36c;
+    box-shadow: inset 0 0 0 1px #36c;
+}
+
+.search-bar button {
+    border: none;
+    font-size: 1.2rem;
+    height: 54.8px;
+    width: 65px;
+    margin-bottom: 12px;
+    background-color: #36c;
+    border-radius: 0 3px 3px 0;
+}
+
+.search-bar button:hover {
+    background-color: rgb(73, 124, 227);
+}
+
+.search-bar button:active {
+    background-color: #36c;
+    transform: scale(0.95);
+}
+
+.random-page a {
+    text-decoration: none;
+    color: #000;
+}
+.random-page:hover {
+    cursor: pointer;
+}
+
+.results {
+    margin: 0 auto;
+    max-width: 768px;
+}
+
+.result {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #fff;
+    border-radius: 12px;
+    font-size: 18px;
+}
+
+.result:hover {
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.result-link {
+    text-decoration: none;
+    color: #000;
+}
+
+.result h3 {
+    color: #1a0dab;
+}
+
+.result .searchmatch {
+    font-weight: 800;
+}
